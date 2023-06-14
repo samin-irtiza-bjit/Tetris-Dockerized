@@ -1,0 +1,46 @@
+version: '3.9'
+
+services:
+  web:
+    container_name: nginx-server
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '80:8080'
+    volumes:
+      - ./web-data:/var/www/html
+    networks:
+      - tetris-net
+    depends_on:
+      - mysql
+
+        #  php-fpm:
+        #    container_name: php-fpm
+        #    restart: always
+        #    image: php:8-fpm
+        #    volumes:
+        #      - ./web-data:/var/www/html
+        #    networks:
+        #      - tetris-net
+
+  mysql:
+    image: mysql:latest
+    container_name: db-server
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=tetris
+      - MYSQL_USER=tetris
+      - MYSQL_PASSWORD=tetrispass
+    volumes:
+      - ./db-data:/var/lib/mysql
+    networks:
+      - tetris-net
+
+networks:      
+  tetris-net:
+volumes:
+  web-data:
+  db-data:
