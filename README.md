@@ -1,3 +1,4 @@
+trigger build
 # Tetris-Dockerized
 
 ## Installation and Setup
