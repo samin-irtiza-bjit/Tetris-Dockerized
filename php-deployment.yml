@@ -15,6 +15,7 @@ spec:
       containers:
         - name: php
           image: saminbjit/tetris-dockerized:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
           volumeMounts:
